@@ -9,6 +9,9 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "HomeView",
+  mounted() {
+    // get players
+  },
   components: {},
 });
 </script>
