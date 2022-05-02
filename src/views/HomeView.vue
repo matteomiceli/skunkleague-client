@@ -27,6 +27,7 @@ export default defineComponent({
     const players: Player[] = await res.json();
     this.players = players;
   },
+
   components: {
     PlayerTable,
   },
