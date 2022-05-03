@@ -16,11 +16,13 @@ export default defineComponent({
     baseUrl: string;
     games: Game[] | null;
     selectedRound: Game[] | null;
+    round: number;
   } {
     return {
       baseUrl: "https://skunkleague.herokuapp.com/",
       games: null,
       selectedRound: null,
+      round: 1,
     };
   },
 
@@ -28,7 +30,19 @@ export default defineComponent({
     const res = await fetch(this.baseUrl + "games");
     const games: Game[] = await res.json();
     this.games = games;
-    console.log(games);
+    this.round = this.setRound();
+  },
+
+  methods: {
+    setRound(): number {
+      let highestRound = 1;
+      this.games?.forEach((game) => {
+        if (game.round > highestRound) {
+          highestRound = game.round;
+        }
+      });
+      return highestRound;
+    },
   },
 
   components: {
