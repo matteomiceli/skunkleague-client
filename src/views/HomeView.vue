@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <button class="mt-24 text-blue-600">
+      <router-link to="/player/add">New Player</router-link>
+    </button>
     <PlayerTable :players="this.players" />
   </div>
 </template>

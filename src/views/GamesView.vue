@@ -1,6 +1,6 @@
 <template>
   <div class="games mt-24">
-    <h1>Upcoming Games</h1>
+    <h1 class="text-3xl font-semibold mb-12">Upcoming Games</h1>
     <GamesTable :games="games" />
   </div>
 </template>
@@ -28,10 +28,12 @@ export default defineComponent({
   },
 
   async mounted() {
-    const res = await fetch(this.baseUrl + "games");
-    const games: Game[] = await res.json();
-    this.games = games;
-    this.round = this.setRound();
+    if (!this.games) {
+      const res = await fetch(this.baseUrl + "games");
+      const games: Game[] = await res.json();
+      this.games = games;
+      this.round = this.setRound();
+    }
   },
 
   methods: {

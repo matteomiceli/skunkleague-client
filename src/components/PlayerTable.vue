@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="w-full sm:w-4/6 mx-auto mt-24">
+    <table class="w-full sm:w-4/6 mx-auto mt-12">
       <tr class="bg-gray-200">
         <th class="text-left">Name</th>
         <th class="text-right">Points</th>
