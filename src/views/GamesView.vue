@@ -1,5 +1,6 @@
 <template>
   <div class="games mt-24">
+    <h1>Upcoming Games</h1>
     <GamesTable :games="games" />
   </div>
 </template>

@@ -23,9 +23,11 @@ export default defineComponent({
   },
 
   async mounted() {
-    const res = await fetch(this.baseUrl + "players");
-    const players: Player[] = await res.json();
-    this.players = players;
+    if (!this.players) {
+      const res = await fetch(this.baseUrl + "players");
+      const players: Player[] = await res.json();
+      this.players = players;
+    }
   },
 
   components: {
