@@ -14,6 +14,7 @@
         </td>
       </tr>
     </table>
+    <p class="w-full flex justify-center mt-12" v-if="!players">Loading...</p>
   </div>
 </template>
 

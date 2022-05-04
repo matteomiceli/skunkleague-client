@@ -27,6 +27,7 @@
         v-model="accessCode"
       />
     </div>
+    <p :class="`${error ? 'visible' : 'invisible'} text-red-500 my-2`">Fields cannot be empty</p>
     <button @click="createPlayer">New Player</button>
   </div>
 </template>
@@ -41,6 +42,7 @@ export default defineComponent({
     firstName: string;
     lastName: string;
     accessCode: string;
+    error: boolean;
   } {
     return {
       baseUrl: "https://skunkleague.herokuapp.com/",
@@ -48,21 +50,31 @@ export default defineComponent({
       firstName: "",
       lastName: "",
       accessCode: "",
+      error: false,
     };
   },
 
   methods: {
     async createPlayer() {
-      const res = await fetch(this.baseUrl + "players/add", {
-        mode: "cors",
-        method: "POST",
-        body: JSON.stringify({
-          player: { alias: this.alias, firstName: this.firstName, lastName: this.lastName },
-          accesscode: this.accessCode,
-        }),
-      });
-      const status = res.ok;
-      console.log(status);
+      if (this.alias && this.firstName && this.lastName && this.accessCode) {
+        const res = await fetch(this.baseUrl + "players/add", {
+          mode: "cors",
+          method: "POST",
+          body: JSON.stringify({
+            player: { alias: this.alias, firstName: this.firstName, lastName: this.lastName },
+            accesscode: this.accessCode,
+          }),
+        });
+        const status = res.ok;
+
+        if (status) {
+          this.error = false;
+        } else {
+          this.error = true;
+        }
+      } else {
+        this.error = true;
+      }
     },
   },
 });

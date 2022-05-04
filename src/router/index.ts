@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import GamesView from "../views/GamesView.vue";
 import AddPlayer from "../views/AddPlayer.vue";
+import AdminGames from "../views/AdminGames.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -26,6 +27,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/player/add",
     name: "add player",
     component: AddPlayer,
+  },
+  {
+    path: "/admin/games",
+    name: "admin games",
+    component: AdminGames,
   },
 ];
 
