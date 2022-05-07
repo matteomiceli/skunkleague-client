@@ -5,9 +5,9 @@ type Player = {
   FirstName: string;
   LastName: string;
   ID: ObjectId;
-  Losses: number;
-  Wins: number;
-  Points: number;
+  Losses?: number;
+  Wins?: number;
+  Points?: number;
 };
 
 export { Player };

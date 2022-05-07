@@ -1,7 +1,16 @@
 <template>
   <div class="games mt-24">
     <h1 class="text-3xl font-semibold mb-12">Upcoming Games</h1>
-    <GamesTable :games="games" />
+    <div
+      v-for="game in games"
+      :key="game._id"
+      :class="`${
+        game.winner ? 'border border-green-700' : 'border border-gray-300'
+      } flex flex-col w-4/6 mx-auto p-2`"
+    >
+      <GamesTable :game="game" />
+    </div>
+    <p class="w-full flex justify-center mt-12" v-if="!games">Loading...</p>
   </div>
 </template>
 

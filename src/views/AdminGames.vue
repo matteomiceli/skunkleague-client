@@ -5,7 +5,7 @@
       <label for="player1">Player 1</label>
       <select v-model="player1" name="player1" id="player1" class="py-1">
         <option value="" selected>--</option>
-        <option v-for="player in players" :value="player.Alias" :key="player._id">
+        <option v-for="player in players" :value="player" :key="player._id">
           {{ player.Alias }}
         </option>
       </select>
@@ -13,18 +13,20 @@
       <label for="player1">Player 2</label>
       <select v-model="player2" name="player2" id="player2" class="py-1">
         <option value="" selected>--</option>
-        <option v-for="player in players" :value="player.Alias" :key="player._id">
+        <option v-for="player in players" :value="player" :key="player._id">
           {{ player.Alias }}
         </option>
       </select>
+      <label for="round">Round:</label>
+      <input name="round" type="number" class="border border-gray-400 py-1 w-16" v-model="round" />
       <input
-        placeholder="round"
-        type="text"
-        class="border border-gray-400 py-1 w-16"
-        v-model="round"
+        placeholder="code"
+        type="password"
+        class="border border-gray-400 py-1 w-2/6"
+        v-model="accessCode"
       />
     </div>
-    <p :class="`${error ? 'visible' : 'invisible'} text-red-500 my-2`">Fields cannot be empty</p>
+    <p class="text-red-500 my-2">{{ error }}</p>
     <button @click="createGame">Create Game</button>
   </div>
 </template>
@@ -65,24 +67,37 @@ export default defineComponent({
   methods: {
     async createGame() {
       if (this.round && this.player1 && this.player2 && this.accessCode) {
-        const res = await fetch(this.baseUrl + "players/add", {
+        const res = await fetch(this.baseUrl + "games/add", {
           mode: "cors",
           method: "POST",
           body: JSON.stringify({
-            // **
-            game: { alias: this.alias, firstName: this.firstName, lastName: this.lastName },
+            game: {
+              players: [
+                {
+                  alias: this.player1.Alias,
+                  id: this.player1.ID,
+                  points: 0,
+                },
+                {
+                  alias: this.player2.Alias,
+                  id: this.player2.ID,
+                  points: 0,
+                },
+              ],
+              round: this.round,
+            },
             accesscode: this.accessCode,
           }),
         });
         const status = res.ok;
 
         if (status) {
-          this.error = false;
+          this.error = "";
         } else {
-          this.error = true;
+          this.error = "Error creating game";
         }
       } else {
-        this.error = true;
+        this.error = "Fields cannot be left empty";
       }
     },
   },
