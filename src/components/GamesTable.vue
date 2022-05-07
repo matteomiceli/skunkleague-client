@@ -11,7 +11,7 @@
   </div>
   <div v-if="isExpanded || game.winner">
     <div v-if="!game.winner">
-      <ReportForm :reportResults="reportResults" />
+      <ReportGame :reportResults="reportResults" :game="game" />
     </div>
     <div v-else>
       <GameResult :game="game" />
@@ -22,6 +22,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Game } from "../types/game";
+import ReportGame from "../components/ReportGame.vue";
 import GameResult from "../components/GameResult.vue";
 
 export default defineComponent({
@@ -44,6 +45,6 @@ export default defineComponent({
     },
   },
 
-  components: { GameResult },
+  components: { GameResult, ReportGame },
 });
 </script>
