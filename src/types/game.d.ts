@@ -14,4 +14,4 @@ type PlayerResult = {
   points: number;
 };
 
-export { Game };
+export { Game, PlayerResult };
