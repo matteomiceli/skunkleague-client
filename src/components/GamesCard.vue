@@ -1,30 +1,30 @@
 <template>
   <div
     :class="`${
-      game.winner ? 'border border-green-700' : 'border border-gray-300'
+      game.winner ? 'border border-gray-400 opacity-50' : 'border border-gray-400'
     } flex flex-col mx-auto mb-2 rounded-lg`"
   >
     <div
-      :class="`flex justify-between cursor-pointer bg-gray-100 p-3 ${
-        isExpanded ? 'rounded-t-lg' : 'rounded-lg'
+      :class="`flex justify-between bg-gray-100 p-3 ${isExpanded ? 'rounded-t-lg' : 'rounded-lg'} ${
+        !game.winner ? 'cursor-pointer' : ''
       }`"
       @click="() => expandGame()"
     >
-      <div>
-        {{ game.players[0].alias }} <span class="text-yellow-600">vs</span>
+      <div class="font-semibold text-lg">
+        {{ game.players[0].alias }} <span class="text-yellow-600 font-normal">vs</span>
         {{ game.players[1].alias }}
       </div>
       <div v-if="!game.winner">
         <button>report result</button>
       </div>
-      <div v-else>scores and stuff</div>
+      <div v-else>
+        Winner: <span class="font-bold"> {{ this.getWinner().alias }} </span>
+        <span class="text-sm font-normal">(+{{ this.getWinner().points }})</span>
+      </div>
     </div>
-    <div v-if="isExpanded || game.winner" class="p-2">
+    <div v-if="isExpanded || game.winner">
       <div v-if="!game.winner">
         <ReportGame :reportResults="reportResults" :game="game" />
-      </div>
-      <div v-else>
-        <GameResult :game="game" />
       </div>
     </div>
   </div>
@@ -34,7 +34,6 @@
 import { defineComponent } from "vue";
 import { Game } from "../types/game";
 import ReportGame from "./ReportGame.vue";
-import GameResult from "./GameResult.vue";
 
 export default defineComponent({
   props: ["game"],
@@ -54,8 +53,13 @@ export default defineComponent({
     expandGame() {
       this.isExpanded = !this.isExpanded;
     },
+    getWinner() {
+      return this.game.players[0].id === this.game.winner
+        ? this.game.players[0]
+        : this.game.players[1];
+    },
   },
 
-  components: { GameResult, ReportGame },
+  components: { ReportGame },
 });
 </script>

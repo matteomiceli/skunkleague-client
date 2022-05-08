@@ -2,7 +2,7 @@
   <div class="home">
     <div class="w-full flex justify-between">
       <h1 class="text-3xl font-semibold">Players</h1>
-      <Button text="New Player" link="/player/add" />
+      <Button text="Add Player" link="/player/add" />
     </div>
     <PlayerTable :players="this.players" />
   </div>

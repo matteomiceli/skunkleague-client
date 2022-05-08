@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap space-x-4 mt-2 text-sm mb-2 items-center">
+  <div class="flex flex-wrap space-x-4 my-4 text-sm mx-3 items-center">
     <div>
       <label for="winner">Winner:</label>
       <select class="w-24" name="winner" id="winner" v-model="winner">
@@ -20,7 +20,8 @@
     <input type="password" class="w-24 bg-gray-100" placeholder="code" v-model="accesscode" />
     <Button @onClick="submitResult" text="Report" :small="true" />
   </div>
-  <p class="text-red-500 text-sm my-2">{{ error }}</p>
+  <p class="text-red-500 text-sm my-2 mx-3">{{ error }}</p>
+  <p class="text-green-500 text-sm my-2 mx-3">{{ success }}</p>
 </template>
 
 <script lang="ts">
@@ -34,6 +35,7 @@ export default defineComponent({
   data(): {
     baseUrl: string;
     error: string;
+    success: string;
     winner: string;
     players: PlayerResult[];
     accesscode: string;
@@ -41,6 +43,7 @@ export default defineComponent({
     return {
       baseUrl: "https://skunkleague.herokuapp.com/",
       error: "",
+      success: "",
       winner: "",
       players: [this.game.players[0], this.game.players[1]],
       accesscode: "",
@@ -62,7 +65,9 @@ export default defineComponent({
         }),
       });
       const status = res.ok;
-      status ? "" : (this.error = "Error reporting game result");
+      status
+        ? (this.success = "Game results recorded")
+        : (this.error = "Error reporting game result");
     },
   },
   components: { Button },

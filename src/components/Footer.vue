@@ -1,6 +1,6 @@
 <template>
   <div class="flex h-8 absolute bottom-0 w-full justify-center items-center text-sm text-gray-500">
-    {{ `SkunkLeague 2022 version ${version}` }}
+    {{ `SkunkLeague 2022 -- version ${version}` }}
   </div>
 </template>
 

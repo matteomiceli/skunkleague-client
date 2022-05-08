@@ -28,12 +28,13 @@
       />
     </div>
     <p :class="`${error ? 'visible' : 'invisible'} text-red-500 my-2`">Fields cannot be empty</p>
-    <button @click="createPlayer">New Player</button>
+    <Button text="Add Player" @onClick="createPlayer" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Button from "../components/Button.vue";
 
 export default defineComponent({
   data(): {
@@ -76,6 +77,10 @@ export default defineComponent({
         this.error = true;
       }
     },
+  },
+
+  components: {
+    Button,
   },
 });
 </script>
