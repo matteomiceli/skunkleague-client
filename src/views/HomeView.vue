@@ -1,8 +1,9 @@
 <template>
   <div class="home">
-    <button class="mt-24 ml-12 text-blue-600">
-      <router-link to="/player/add">New Player</router-link>
-    </button>
+    <div class="w-full flex justify-between">
+      <h1 class="text-3xl font-semibold">Players</h1>
+      <Button text="New Player" link="/player/add" />
+    </div>
     <PlayerTable :players="this.players" />
   </div>
 </template>
@@ -11,6 +12,7 @@
 import { defineComponent } from "vue";
 import PlayerTable from "../components/PlayerTable.vue";
 import { Player } from "../types/player";
+import Button from "../components/Button.vue";
 
 export default defineComponent({
   name: "HomeView",
@@ -29,12 +31,20 @@ export default defineComponent({
     if (!this.players) {
       const res = await fetch(this.baseUrl + "players");
       const players: Player[] = await res.json();
+
+      players.sort((a, b) => {
+        if (a.Points !== undefined && b.Points !== undefined) {
+          return b.Points - a.Points;
+        }
+        return 0;
+      });
       this.players = players;
     }
   },
 
   components: {
     PlayerTable,
+    Button,
   },
 });
 </script>

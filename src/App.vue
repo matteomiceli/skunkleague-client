@@ -1,10 +1,12 @@
 <template>
   <NavBar />
-  <router-view v-slot="{ Component }">
-    <keep-alive>
-      <component :is="Component" />
-    </keep-alive>
-  </router-view>
+  <div class="viewContainer mx-auto w-11/12 mt-24 max-w-3xl">
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
+  </div>
   <Footer />
 </template>
 

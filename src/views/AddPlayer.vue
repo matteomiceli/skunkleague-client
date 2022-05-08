@@ -1,7 +1,7 @@
 <template>
   <div class="mt-24">
-    <h1 class="text-3xl font-semibold">Add Player</h1>
-    <div class="inputs flex flex-col mt-2 w-3/6 space-y-2">
+    <h1 class="text-3xl font-semibold mb-6">Add Player</h1>
+    <div class="inputs flex flex-col mt-2 w-64 space-y-2">
       <input
         placeholder="nickname"
         type="text"

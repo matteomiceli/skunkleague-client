@@ -1,8 +1,9 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
+  <nav class="flex justify-center items-center w-full h-10 space-x-4 text-lg">
+    <router-link to="/" class="hover:text-gray-600">Players</router-link>
     <!-- <router-link to="/about">About</router-link> | -->
-    <router-link to="/games">Games</router-link>
+    <div>|</div>
+    <router-link to="/games" class="hover:text-gray-600">Games</router-link>
   </nav>
 </template>
 

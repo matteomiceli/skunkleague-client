@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="w-full sm:w-4/6 mx-auto mt-12">
+    <table class="w-full mx-auto mt-8">
       <tr class="bg-gray-200">
         <th class="text-left">Name</th>
         <th class="text-right">Points</th>
@@ -10,7 +10,11 @@
         <td class="text-left">{{ player.Alias }}</td>
         <td class="text-right">{{ player.Points }}</td>
         <td class="text-right">
-          {{ player.Wins || player.Losses ? player.Wins / player.Losses : "--" }}
+          {{
+            player.Wins
+              ? Math.round((player.Wins / (player.Wins + player.Losses)) * 100) + "%"
+              : "0%"
+          }}
         </td>
       </tr>
     </table>
