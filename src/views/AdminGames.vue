@@ -22,18 +22,20 @@
       <input
         placeholder="code"
         type="password"
-        class="border border-gray-400 py-1 w-2/6"
+        class="border border-gray-400 py-1 w-28"
         v-model="accessCode"
       />
     </div>
     <p class="text-red-500 my-2">{{ error }}</p>
-    <button @click="createGame">Create Game</button>
+    <p class="text-green-500 mb-2">{{ success }}</p>
+    <Button @onClick="createGame" text="Create Game" />
   </div>
 </template>
 
 <script lang="ts">
 import { Player } from "@/types/player";
 import { defineComponent } from "vue";
+import Button from "../components/Button.vue";
 
 export default defineComponent({
   data(): {
@@ -44,6 +46,7 @@ export default defineComponent({
     accessCode: string;
     round: string;
     error: string;
+    success: string;
   } {
     return {
       baseUrl: "https://skunkleague.herokuapp.com/",
@@ -53,6 +56,7 @@ export default defineComponent({
       accessCode: "",
       round: "",
       error: "",
+      success: "",
     };
   },
 
@@ -93,6 +97,7 @@ export default defineComponent({
 
         if (status) {
           this.error = "";
+          this.success = "Game created!";
         } else {
           this.error = "Error creating game";
         }
@@ -101,5 +106,7 @@ export default defineComponent({
       }
     },
   },
+
+  components: { Button },
 });
 </script>

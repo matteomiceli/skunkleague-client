@@ -27,7 +27,8 @@
         v-model="accessCode"
       />
     </div>
-    <p :class="`${error ? 'visible' : 'invisible'} text-red-500 my-2`">Fields cannot be empty</p>
+    <p :class="`${error ? 'visible' : 'invisible'} text-red-500 mt-2`">Fields cannot be empty</p>
+    <p class="text-green-500 mb-2">{{ success }}</p>
     <Button text="Add Player" @onClick="createPlayer" />
   </div>
 </template>
@@ -44,6 +45,7 @@ export default defineComponent({
     lastName: string;
     accessCode: string;
     error: boolean;
+    success: string;
   } {
     return {
       baseUrl: "https://skunkleague.herokuapp.com/",
@@ -52,6 +54,7 @@ export default defineComponent({
       lastName: "",
       accessCode: "",
       error: false,
+      success: "",
     };
   },
 
@@ -70,6 +73,7 @@ export default defineComponent({
 
         if (status) {
           this.error = false;
+          this.success = "Player created!";
         } else {
           this.error = true;
         }
