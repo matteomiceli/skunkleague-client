@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import GamesView from "../views/GamesView.vue";
 import AddPlayer from "../views/AddPlayer.vue";
 import AdminGames from "../views/AdminGames.vue";
+import PlayerView from "../views/PlayerView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -27,6 +28,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/player/add",
     name: "add player",
     component: AddPlayer,
+  },
+  {
+    path: "/player/:id",
+    name: "player view",
+    component: PlayerView,
   },
   {
     path: "/admin/games",

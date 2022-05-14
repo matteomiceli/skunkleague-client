@@ -3,7 +3,7 @@
     <div class="flex mb-12 justify-between">
       <h1 class="text-3xl font-semibold">Upcoming Games</h1>
       <div class="flex items-center border border-gr px-1 rounded">
-        <label for="round">Round:</label>
+        <label for="round">Week:</label>
         <select name="round" id="round" class="ml-2 w-12" v-model="roundSelect">
           <option v-for="i in highestRound" :value="highestRound - (i - 1)" :key="i">
             {{ highestRound - (i - 1) }}
