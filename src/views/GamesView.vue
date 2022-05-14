@@ -58,6 +58,7 @@ export default defineComponent({
       this.games = games;
       this.highestRound = this.getHighestRound();
       this.roundSelect = this.highestRound.toString();
+      this.gamesInRound = this.filterRound();
     }
   },
 
