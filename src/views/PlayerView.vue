@@ -18,6 +18,7 @@
         <GamesCard :game="game" />
       </div>
     </div>
+    <p class="w-full flex justify-center mt-12" v-else>No matches played</p>
   </div>
   <p class="w-full flex justify-center mt-12" v-else>Loading...</p>
 </template>
