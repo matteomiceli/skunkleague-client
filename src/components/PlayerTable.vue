@@ -10,7 +10,7 @@
         <td
           class="text-left text-blue-700 overflow-ellipsis overflow-hidden min-w-36 whitespace-nowrap block"
         >
-          <a :href="'player/' + player.ID">{{ player.Alias }}</a>
+          <a :href="'player/' + player.ID">{{ player.Alias }} ({{ player.FirstName }})</a>
         </td>
         <td class="text-right">{{ player.Points }}</td>
         <td class="text-right">

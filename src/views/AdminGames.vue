@@ -6,7 +6,7 @@
       <select v-model="player1" name="player1" id="player1" class="py-1">
         <option value="" selected>--</option>
         <option v-for="player in players" :value="player" :key="player._id">
-          {{ player.Alias }}
+          {{ player.Alias }} ({{ player.FirstName }})
         </option>
       </select>
       <p>VS</p>
@@ -17,7 +17,7 @@
           {{ player.Alias }}
         </option>
       </select>
-      <label for="round">Round:</label>
+      <label for="round">Week:</label>
       <input name="round" type="number" class="border border-gray-400 py-1 w-16" v-model="round" />
       <input
         placeholder="code"
