@@ -34,6 +34,7 @@ export default defineComponent({
     highestRound: number;
     round: number;
     roundSelect: string;
+    startingWeek: Date;
   } {
     return {
       baseUrl: "https://skunkleague.herokuapp.com/",
@@ -42,6 +43,7 @@ export default defineComponent({
       highestRound: 0,
       round: 1,
       roundSelect: "",
+      startingWeek: new Date("May 16, 2022"),
     };
   },
 
@@ -58,7 +60,8 @@ export default defineComponent({
       const games: Game[] = await res.json();
       this.games = games;
       this.highestRound = this.getHighestRound();
-      this.roundSelect = this.highestRound.toString();
+      this.roundSelect = this.round.toString();
+      this.incrementWeek();
       this.gamesInRound = this.filterRound();
     }
   },
@@ -70,10 +73,7 @@ export default defineComponent({
       });
 
       gamesInRound?.sort((a) => {
-        if (a.winner) {
-          return 1;
-        }
-        return -1;
+        return a.winner ? 1 : -1;
       });
 
       if (gamesInRound) {
@@ -91,6 +91,15 @@ export default defineComponent({
         }
       });
       return highestRound;
+    },
+
+    // incomplete
+    incrementWeek() {
+      const currDate = Date.now();
+      let difference = currDate - this.startingWeek.getTime();
+      const daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+      difference -= daysDifference * 1000 * 60 * 60 * 24;
+      console.log(difference);
     },
   },
 

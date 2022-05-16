@@ -14,7 +14,7 @@
       <select v-model="player2" name="player2" id="player2" class="py-1">
         <option value="" selected>--</option>
         <option v-for="player in players" :value="player" :key="player._id">
-          {{ player.Alias }}
+          {{ player.Alias }} ({{ player.FirstName }})
         </option>
       </select>
       <label for="round">Week:</label>
@@ -97,7 +97,7 @@ export default defineComponent({
 
         if (status) {
           this.error = "";
-          this.success = "Game created!";
+          this.success = `Game created! ${this.player1.Alias} vs ${this.player2.Alias}`;
         } else {
           this.error = "Error creating game";
         }
