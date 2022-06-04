@@ -18,7 +18,7 @@
       <input type="number" class="w-12 bg-gray-100" v-model="players[1].points" />
     </div>
     <input type="password" class="w-24 bg-gray-100" placeholder="code" v-model="accesscode" />
-    <Button @onClick="submitResult" text="Report" :small="true" />
+    <Button @onClick="submitResult" :disabled="isSubmitted" text="Report" :small="true" />
   </div>
   <p class="text-red-500 text-sm my-2 mx-3">{{ error }}</p>
   <p class="text-green-500 text-sm my-2 mx-3">{{ success }}</p>
@@ -28,6 +28,7 @@
 import { PlayerResult } from "@/types/game";
 import { defineComponent } from "vue";
 import Button from "../components/Button.vue";
+import { delay } from "../utils/helpers.utils";
 
 export default defineComponent({
   props: ["reportResults", "game"],
@@ -39,6 +40,7 @@ export default defineComponent({
     winner: string;
     players: PlayerResult[];
     accesscode: string;
+    isSubmitted: boolean;
   } {
     return {
       baseUrl: "https://skunkleague.herokuapp.com/",
@@ -47,6 +49,7 @@ export default defineComponent({
       winner: "",
       players: [this.game.players[0], this.game.players[1]],
       accesscode: "",
+      isSubmitted: false,
     };
   },
 
@@ -65,9 +68,13 @@ export default defineComponent({
         }),
       });
       const status = res.ok;
-      status
-        ? (this.success = "Game results recorded")
-        : (this.error = "Error reporting game result");
+      if (status) {
+        this.success = "Game results recorded";
+        this.isSubmitted = true;
+        console.log(this.isSubmitted);
+      } else {
+        this.error = "Error reporting game result";
+      }
     },
   },
   components: { Button },

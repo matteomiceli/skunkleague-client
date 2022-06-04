@@ -99,7 +99,6 @@ export default defineComponent({
       let difference = currDate - this.startingWeek.getTime();
       const daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
       difference -= daysDifference * 1000 * 60 * 60 * 24;
-      console.log(difference);
     },
   },
 
