@@ -41,7 +41,7 @@ export default defineComponent({
       games: null,
       gamesInRound: null,
       highestRound: 0,
-      round: 1,
+      round: 2,
       roundSelect: "",
       startingWeek: new Date("May 16, 2022"),
     };
